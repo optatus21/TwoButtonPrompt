@@ -21,6 +21,7 @@ def one_button_prompt_api(_: gr.Blocks, app: FastAPI):
 
     @app.post("/one_button_prompt/prompt/random")
     async def random_prompts(numberofprompts:int = Body(1,title="number of prompts"),
+        includeinrandom:bool = Body(False,title='includeinrandom'),
         insanitylevel: int= Body(5,title="insanity level"),
         forcesubject: str =Body('all',title="force subject"),
         artists : str =Body('all',title="artists"),
@@ -44,7 +45,7 @@ def one_button_prompt_api(_: gr.Blocks, app: FastAPI):
         ):
 
             
-            keys = ['insanitylevel', 'forcesubject', 'artists', 'imagetype', 'onlyartists', 'antivalues', 'prefixprompt',
+            keys = ['includeinrandom','insanitylevel', 'forcesubject', 'artists', 'imagetype', 'onlyartists', 'antivalues', 'prefixprompt',
             'suffixprompt', 'promptcompounderlevel', 'seperator', 'givensubject', 'smartsubject', 'giventypeofimage',
             'imagemodechance', 'gender', 'subtypeobject','subtypehumanoid','subtypeconcept','advancedprompting','hardturnoffemojis']
             payload = {}

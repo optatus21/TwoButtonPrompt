@@ -13,7 +13,7 @@ OBPresets = OneButtonPresets()
 # insanity level controls randomness of propmt 0-10
 # forcesubject van be used to force a certain type of subject
 # Set artistmode to none, to exclude artists 
-def build_dynamic_prompt(insanitylevel = 5, forcesubject = "all", artists = "all", imagetype = "all", onlyartists = False, antivalues = "", prefixprompt = "", suffixprompt ="",promptcompounderlevel ="1", seperator = "comma", givensubject="",smartsubject = True,giventypeofimage="", imagemodechance = 20, gender = "all", subtypeobject="all", subtypehumanoid="all", subtypeconcept="all", advancedprompting=True, hardturnoffemojis=False, seed=-1, overrideoutfit="", prompt_g_and_l = False, base_model = "SD1.5", OBP_preset = "", prompt_enhancer = "none", subtypeanimal="all", subtypelocation="all", preset_prefix = "", preset_suffix = ""):
+def build_dynamic_prompt(includeinrandom = False, insanitylevel = 5, forcesubject = "all", artists = "all", imagetype = "all", onlyartists = False, antivalues = "", prefixprompt = "", suffixprompt ="",promptcompounderlevel ="1", seperator = "comma", givensubject="",smartsubject = True,giventypeofimage="", imagemodechance = 20, gender = "all", subtypeobject="all", subtypehumanoid="all", subtypeconcept="all", advancedprompting=True, hardturnoffemojis=False, seed=-1, overrideoutfit="", prompt_g_and_l = False, base_model = "SD1.5", OBP_preset = "", prompt_enhancer = "none", subtypeanimal="all", subtypelocation="all", preset_prefix = "", preset_suffix = ""):
 
     remove_weights = False
     less_verbose = False
@@ -62,7 +62,16 @@ def build_dynamic_prompt(insanitylevel = 5, forcesubject = "all", artists = "all
     original_OBP_preset = OBP_preset
     if(OBP_preset == OBPresets.RANDOM_PRESET_OBP):
         obp_options = OBPresets.load_obp_presets()
-        random_preset = random.choice(list(obp_options.keys()))
+        
+        # only select presets where the includeinrandom option is checked
+        random_selected = False
+        
+        while not random_selected:
+            print("Finding a random preset where includeinrandom is true")
+            random_preset = random.choice(list(obp_options.keys()))
+            
+            if OBPresets.get_obp_preset(random_preset)["includeinrandom"]:
+                random_selected = True
         print("Engaging randomized presets, locking on to: " + random_preset)
 
         selected_opb_preset = OBPresets.get_obp_preset(random_preset)

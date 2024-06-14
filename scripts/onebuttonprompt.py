@@ -347,19 +347,19 @@ if(generateconceptmixer):
 class Script(scripts.Script):
     
     def title(self):
-        return "One Button Prompt"
+        return "Two Button Prompt"
 
     def show(self, is_img2img):
         return True
 
         
     def ui(self, is_img2img):
-        def gen_prompt(insanitylevel, subject, artist, imagetype, antistring, prefixprompt, suffixprompt, promptcompounderlevel, seperator,givensubject,smartsubject,giventypeofimage, imagemodechance,chosengender, chosensubjectsubtypeobject, chosensubjectsubtypehumanoid, chosensubjectsubtypeconcept,givenoutfit, base_model, OBP_preset, amountoffluff, promptenhancer, presetprefix, presetsuffix):
+        def gen_prompt(includeinrandom,insanitylevel, subject, artist, imagetype, antistring, prefixprompt, suffixprompt, promptcompounderlevel, seperator,givensubject,smartsubject,giventypeofimage, imagemodechance,chosengender, chosensubjectsubtypeobject, chosensubjectsubtypehumanoid, chosensubjectsubtypeconcept,givenoutfit, base_model, OBP_preset, amountoffluff, promptenhancer, presetprefix, presetsuffix):
 
             promptlist = []
 
             for i in range(5):
-                base_prompt = build_dynamic_prompt(insanitylevel,subject,artist, imagetype, False, antistring,prefixprompt,suffixprompt,promptcompounderlevel,seperator,givensubject,smartsubject, giventypeofimage, imagemodechance,chosengender, chosensubjectsubtypeobject, chosensubjectsubtypehumanoid, chosensubjectsubtypeconcept,True,False,-1,givenoutfit,False,base_model, OBP_preset, promptenhancer, "", "", presetprefix, presetsuffix)
+                base_prompt = build_dynamic_prompt(includeinrandom,insanitylevel,subject,artist, imagetype, False, antistring,prefixprompt,suffixprompt,promptcompounderlevel,seperator,givensubject,smartsubject, giventypeofimage, imagemodechance,chosengender, chosensubjectsubtypeobject, chosensubjectsubtypehumanoid, chosensubjectsubtypeconcept,True,False,-1,givenoutfit,False,base_model, OBP_preset, promptenhancer, "", "", presetprefix, presetsuffix)
                 fluffed_prompt = flufferizer(prompt=base_prompt, amountoffluff=amountoffluff)
                 promptlist.append(fluffed_prompt)
 
@@ -390,7 +390,7 @@ class Script(scripts.Script):
             with gr.Row(variant="compact"):
                 gr.Markdown("""
                             <font size="2">
-                            One Button Prompt is now active. Just press the normal Generate button to start generating images.
+                            Two Button Prompt is now active. Just press the normal Generate button to start generating images.
 
                             Presets can be used to store and load settings.
 
@@ -442,6 +442,8 @@ class Script(scripts.Script):
             
             # End of this part of presets
                 
+                with gr.Row(variant="compact"):
+                    includeinrandom = gr.Checkbox(label="💡🎲Include in random rotation", value = True)
                 with gr.Row(variant="compact"):
                     insanitylevel = gr.Slider(1, 10, value=5, step=1, label="🎲⬅️❔➡️🎲🎲🎲 Higher levels increases complexity and randomness of generated prompt")
                 with gr.Row(variant="compact"):
@@ -686,9 +688,9 @@ class Script(scripts.Script):
 
                      With 🛠️ Workflow mode, you turn off the automatic generation of new prompts on 'generate', and it will use the Workflow prompt field instead. So you can work and finetune any fun prompts without turning of the script.
 
-                     You can use One Button Prompt wildcards in the workflow prompt. For example -outfit- .
+                     You can use Two Button Prompt wildcards in the workflow prompt. For example -outfit- .
 
-                     With the Prompt Variant, you can let One Button Prompt dynamically create small variance in the workflow prompt. 0 means no effect.
+                     With the Prompt Variant, you can let Two Button Prompt dynamically create small variance in the workflow prompt. 0 means no effect.
 
                      Below here, you can generate a set of random prompts, and send them to the Workflow prompt field. The generation of the prompt uses the settings in the Main tab.
                      </font>
@@ -1027,7 +1029,7 @@ class Script(scripts.Script):
                             extrasupscaler2codeformerweight = gr.Slider(0, 1, value="0.1", step=0.05, label="CodeFormer weight", visible = False)
                     
 
-        genprom.click(gen_prompt, inputs=[insanitylevel,subject, artist, imagetype, antistring,prefixprompt, suffixprompt,promptcompounderlevel, seperator, givensubject,smartsubject,giventypeofimage,imagemodechance, chosengender, chosensubjectsubtypeobject, chosensubjectsubtypehumanoid, chosensubjectsubtypeconcept, givenoutfit, base_model, OBP_preset, amountoffluff, promptenhancer, presetprefix, presetsuffix], outputs=[prompt1, prompt2, prompt3,prompt4,prompt5])
+        genprom.click(gen_prompt, inputs=[includeinrandom,insanitylevel,subject, artist, imagetype, antistring,prefixprompt, suffixprompt,promptcompounderlevel, seperator, givensubject,smartsubject,giventypeofimage,imagemodechance, chosengender, chosensubjectsubtypeobject, chosensubjectsubtypehumanoid, chosensubjectsubtypeconcept, givenoutfit, base_model, OBP_preset, amountoffluff, promptenhancer, presetprefix, presetsuffix], outputs=[prompt1, prompt2, prompt3,prompt4,prompt5])
 
         prompt1toworkflow.click(prompttoworkflowprompt, inputs=prompt1, outputs=workprompt)
         prompt2toworkflow.click(prompttoworkflowprompt, inputs=prompt2, outputs=workprompt)
@@ -1035,7 +1037,7 @@ class Script(scripts.Script):
         prompt4toworkflow.click(prompttoworkflowprompt, inputs=prompt4, outputs=workprompt)
         prompt5toworkflow.click(prompttoworkflowprompt, inputs=prompt5, outputs=workprompt)
 
-        startmain.click(generateimages, inputs=[amountofimages,size,model,samplingsteps,cfg,hiresfix,hiressteps,denoisestrength,samplingmethod, upscaler,hiresscale, apiurl, qualitygate, quality, runs,insanitylevel,subject, artist, imagetype, silentmode, workprompt, antistring, prefixprompt, suffixprompt,negativeprompt,promptcompounderlevel, seperator, img2imgbatch, img2imgsamplingsteps, img2imgcfg, img2imgsamplingmethod, img2imgupscaler, img2imgmodel,img2imgactivate, img2imgscale, img2imgpadding,img2imgdenoisestrength,ultimatesdupscale,usdutilewidth, usdutileheight, usdumaskblur, usduredraw, usduSeamsfix, usdusdenoise, usduswidth, usduspadding, usdusmaskblur, controlnetenabled, controlnetmodel,img2imgdenoisestrengthmod,enableextraupscale,controlnetblockymode,extrasupscaler1,extrasupscaler2,extrasupscaler2visiblity,extrasupscaler2gfpgan,extrasupscaler2codeformer,extrasupscaler2codeformerweight,extrasresize,onlyupscale,givensubject,smartsubject,giventypeofimage,imagemodechance, chosengender, chosensubjectsubtypeobject, chosensubjectsubtypehumanoid, chosensubjectsubtypeconcept, increasestability, qualityhiresfix, qualitymode, qualitykeep, basesize, promptvariantinsanitylevel, givenoutfit, autonegativeprompt, autonegativepromptstrength, autonegativepromptenhance, base_model, OBP_preset, amountoffluff, promptenhancer, presetprefix, presetsuffix])
+        startmain.click(generateimages, inputs=[amountofimages,size,model,samplingsteps,cfg,hiresfix,hiressteps,denoisestrength,samplingmethod, upscaler,hiresscale, apiurl, qualitygate, quality, runs,includeinrandom,insanitylevel,subject, artist, imagetype, silentmode, workprompt, antistring, prefixprompt, suffixprompt,negativeprompt,promptcompounderlevel, seperator, img2imgbatch, img2imgsamplingsteps, img2imgcfg, img2imgsamplingmethod, img2imgupscaler, img2imgmodel,img2imgactivate, img2imgscale, img2imgpadding,img2imgdenoisestrength,ultimatesdupscale,usdutilewidth, usdutileheight, usdumaskblur, usduredraw, usduSeamsfix, usdusdenoise, usduswidth, usduspadding, usdusmaskblur, controlnetenabled, controlnetmodel,img2imgdenoisestrengthmod,enableextraupscale,controlnetblockymode,extrasupscaler1,extrasupscaler2,extrasupscaler2visiblity,extrasupscaler2gfpgan,extrasupscaler2codeformer,extrasupscaler2codeformerweight,extrasresize,onlyupscale,givensubject,smartsubject,giventypeofimage,imagemodechance, chosengender, chosensubjectsubtypeobject, chosensubjectsubtypehumanoid, chosensubjectsubtypeconcept, increasestability, qualityhiresfix, qualitymode, qualitykeep, basesize, promptvariantinsanitylevel, givenoutfit, autonegativeprompt, autonegativepromptstrength, autonegativepromptenhance, base_model, OBP_preset, amountoffluff, promptenhancer, presetprefix, presetsuffix])
         interrupt.click(tryinterrupt, inputs=[apiurl])
         
         automatedoutputsfolderbutton.click(openfolder)
@@ -1043,6 +1045,7 @@ class Script(scripts.Script):
         obp_outputs = [
                     obp_preset_name,
                     obp_preset_save,
+                    includeinrandom,
                     insanitylevel,
                     subject,
                     artist,
@@ -1065,6 +1068,7 @@ class Script(scripts.Script):
         def act_obp_preset_save(
                     obp_preset_name,
                     obp_preset_save,
+                    includeinrandom,
                     insanitylevel,
                     subject,
                     artist,
@@ -1085,6 +1089,7 @@ class Script(scripts.Script):
                     if obp_preset_name != "":
                         obp_options = OBPresets.load_obp_presets()
                         opts = {
+                            "includeinrandom": includeinrandom,
                             "insanitylevel": insanitylevel,
                             "subject": subject,
                             "artist": artist,
@@ -1152,6 +1157,7 @@ class Script(scripts.Script):
                 else:     
                     selected_opb_preset = OBPresets.get_obp_preset(selection)
                 return [
+                    includeinrandom.update(value=selected_opb_preset["includeinrandom"]),
                     insanitylevel.update(value=selected_opb_preset["insanitylevel"]),
                     subject.update(value=selected_opb_preset["subject"]),
                     artist.update(value=selected_opb_preset["artist"]),
@@ -1171,7 +1177,8 @@ class Script(scripts.Script):
                 ]
         OBP_preset.change(OBPPreset_changed_update_custom,
                 inputs=[OBP_preset],
-                outputs=[insanitylevel] + 
+                outputs=[includeinrandom] +
+                [insanitylevel] + 
                 [subject] + 
                 [artist] + 
                 [chosensubjectsubtypeobject] + 
@@ -1347,12 +1354,12 @@ class Script(scripts.Script):
 
       
 
-        return [insanitylevel,subject, artist, imagetype, prefixprompt,suffixprompt,negativeprompt, promptcompounderlevel, ANDtoggle, silentmode, workprompt, antistring, seperator, givensubject, smartsubject, giventypeofimage, imagemodechance, chosengender, chosensubjectsubtypeobject, chosensubjectsubtypehumanoid, chosensubjectsubtypeconcept, promptvariantinsanitylevel, givenoutfit, autonegativeprompt, autonegativepromptstrength, autonegativepromptenhance, base_model, OBP_preset, amountoffluff, promptenhancer, presetprefix, presetsuffix]
+        return [includeinrandom,insanitylevel,subject, artist, imagetype, prefixprompt,suffixprompt,negativeprompt, promptcompounderlevel, ANDtoggle, silentmode, workprompt, antistring, seperator, givensubject, smartsubject, giventypeofimage, imagemodechance, chosengender, chosensubjectsubtypeobject, chosensubjectsubtypehumanoid, chosensubjectsubtypeconcept, promptvariantinsanitylevel, givenoutfit, autonegativeprompt, autonegativepromptstrength, autonegativepromptenhance, base_model, OBP_preset, amountoffluff, promptenhancer, presetprefix, presetsuffix]
             
     
 
     
-    def run(self, p, insanitylevel, subject, artist, imagetype, prefixprompt,suffixprompt,negativeprompt, promptcompounderlevel, ANDtoggle, silentmode, workprompt, antistring,seperator, givensubject, smartsubject, giventypeofimage, imagemodechance, chosengender, chosensubjectsubtypeobject, chosensubjectsubtypehumanoid, chosensubjectsubtypeconcept, promptvariantinsanitylevel, givenoutfit, autonegativeprompt, autonegativepromptstrength, autonegativepromptenhance, base_model, OBP_preset, amountoffluff, promptenhancer, presetprefix, presetsuffix):
+    def run(self, p, includeinrandom, insanitylevel, subject, artist, imagetype, prefixprompt,suffixprompt,negativeprompt, promptcompounderlevel, ANDtoggle, silentmode, workprompt, antistring,seperator, givensubject, smartsubject, giventypeofimage, imagemodechance, chosengender, chosensubjectsubtypeobject, chosensubjectsubtypehumanoid, chosensubjectsubtypeconcept, promptvariantinsanitylevel, givenoutfit, autonegativeprompt, autonegativepromptstrength, autonegativepromptenhance, base_model, OBP_preset, amountoffluff, promptenhancer, presetprefix, presetsuffix):
         
         images = []
         infotexts = []
@@ -1399,7 +1406,7 @@ class Script(scripts.Script):
                 
                 if(ANDtoggle == "automatic"):
                     if(artist != "none"):
-                        preppedprompt += build_dynamic_prompt(insanitylevel,subject,artist, imagetype, True, antistring, base_model=base_model) 
+                        preppedprompt += build_dynamic_prompt(includeinrandom,insanitylevel,subject,artist, imagetype, True, antistring, base_model=base_model) 
                     if(subject == "humanoid"):
                         preppedprompt += ", " + promptcompounderlevel + " people"
                     if(subject == "landscape"):
@@ -1426,7 +1433,7 @@ class Script(scripts.Script):
 
 
                 #Here is where we build a "normal" prompt
-                base_prompt = build_dynamic_prompt(insanitylevel,subject,artist, imagetype, False, antistring, prefixprompt, suffixprompt,promptcompounderlevel, seperator,givensubject,smartsubject,giventypeofimage,imagemodechance,chosengender, chosensubjectsubtypeobject, chosensubjectsubtypehumanoid, chosensubjectsubtypeconcept,True,False,-1,givenoutfit, False, base_model, OBP_preset, promptenhancer, "", "", presetprefix, presetsuffix)
+                base_prompt = build_dynamic_prompt(includeinrandom,insanitylevel,subject,artist, imagetype, False, antistring, prefixprompt, suffixprompt,promptcompounderlevel, seperator,givensubject,smartsubject,giventypeofimage,imagemodechance,chosengender, chosensubjectsubtypeobject, chosensubjectsubtypehumanoid, chosensubjectsubtypeconcept,True,False,-1,givenoutfit, False, base_model, OBP_preset, promptenhancer, "", "", presetprefix, presetsuffix)
                 fluffed_prompt = flufferizer(prompt=base_prompt, amountoffluff=amountoffluff)
                 preppedprompt += fluffed_prompt
 

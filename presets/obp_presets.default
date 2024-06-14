@@ -1,5 +1,6 @@
 {
     "Standard": {
+	  "includeinrandom": false,
       "insanitylevel": 5,
       "subject": "------ all",
       "artist": "all",
@@ -18,6 +19,7 @@
       "antistring": ""
     },
     "Consistent results": {
+	  "includeinrandom": false,
       "insanitylevel": 2,
       "subject": "concept - card names",
       "artist": "none",
@@ -36,6 +38,7 @@
       "antistring": ""
     },
     "Unique People Portraits": {
+	  "includeinrandom": false,
       "insanitylevel": 3,
       "subject": "human - first name",
       "artist": "photography",
@@ -54,6 +57,7 @@
       "antistring": ""
     },
     "Artful People Portraits": {
+	  "includeinrandom": false,
       "insanitylevel": 5,
       "subject": "human - generic",
       "artist": "character",
@@ -72,6 +76,7 @@
       "antistring": ""
     },
     "D&D Style Portraits": {
+	  "includeinrandom": false,
       "insanitylevel": 2,
       "subject": "human - humanoids",
       "artist": "fantasy",
@@ -90,6 +95,7 @@
       "antistring": ""
     },
     "Cybernetic Animals": {
+	  "includeinrandom": false,
       "insanitylevel": 3,
       "subject": "animal - generic",
       "artist": "sci-fi",
@@ -108,6 +114,7 @@
       "antistring": ""
     },
     "Greg mode - The Preset": {
+	  "includeinrandom": false,
       "insanitylevel": 3,
       "subject": "human - generic",
       "artist": "greg mode",
@@ -126,6 +133,7 @@
       "antistring": ""
     },
     "Cyberpunk Characters": {
+	  "includeinrandom": false,
       "insanitylevel": 3,
       "subject": "--- human - all",
       "artist": "character",
@@ -144,6 +152,7 @@
       "antistring": ""
     },
     "Waifu's": {
+	  "includeinrandom": false,
       "insanitylevel": 7,
       "subject": "human - generic",
       "artist": "none",
@@ -162,6 +171,7 @@
       "antistring": ""
     },
     "Husbando's": {
+	  "includeinrandom": false,
       "insanitylevel": 7,
       "subject": "human - generic",
       "artist": "none",
@@ -180,6 +190,7 @@
       "antistring": ""
     },
     "Fashion Models": {
+	  "includeinrandom": false,
       "insanitylevel": 3,
       "subject": "human - generic",
       "artist": "fashion",
@@ -198,6 +209,7 @@
       "antistring": ""
     },
     "WIERD HATS": {
+	  "includeinrandom": false,
       "insanitylevel": 4,
       "subject": "human - generic",
       "artist": "none",
@@ -216,6 +228,7 @@
       "antistring": ""
     },
     "Wallpaper art": {
+	  "includeinrandom": false,
       "insanitylevel": 3,
       "subject": "concept - the x of y",
       "artist": "digital",
@@ -234,6 +247,7 @@
       "antistring": ""
     },
     "The Cauldron": {
+	  "includeinrandom": false,
       "insanitylevel": 5,
       "subject": "concept - mixer",
       "artist": "all",
@@ -252,6 +266,7 @@
       "antistring": ""
     },
     "The Connaisseur": {
+	  "includeinrandom": false,
       "insanitylevel": 5,
       "subject": "concept - poem lines",
       "artist": "all (wild)",
@@ -270,6 +285,7 @@
       "antistring": ""
     },
     "Interesting Landscapes": {
+	  "includeinrandom": false,
       "insanitylevel": 5,
       "subject": "--- landscape - all",
       "artist": "landscape",
@@ -288,6 +304,7 @@
       "antistring": ""
     },
     "Videogame Landscapes": {
+	  "includeinrandom": false,
       "insanitylevel": 4,
       "subject": "landscape - videogame",
       "artist": "digital",
@@ -306,6 +323,7 @@
       "antistring": ""
     },
     "Relaxing Seascapes": {
+	  "includeinrandom": false,
       "insanitylevel": 4,
       "subject": "--- concept - all",
       "artist": "seascape",
@@ -324,6 +342,7 @@
       "antistring": ""
     },
     "Architecture": {
+	  "includeinrandom": false,
       "insanitylevel": 3,
       "subject": "object - building",
       "artist": "architecture",
@@ -342,6 +361,7 @@
       "antistring": ""
     },
     "Nature": {
+	  "includeinrandom": false,
       "insanitylevel": 4,
       "subject": "object - flora",
       "artist": "nature",
@@ -360,6 +380,7 @@
       "antistring": ""
     },
     "Let the CFG sort it out": {
+	  "includeinrandom": false,
       "insanitylevel": 2,
       "subject": "--- concept - all",
       "artist": "all (wild)",
@@ -378,6 +399,7 @@
       "antistring": ""
     },
     "Now this is podracing": {
+	  "includeinrandom": false,
       "insanitylevel": 9,
       "subject": "--- concept - all",
       "artist": "all (wild)",

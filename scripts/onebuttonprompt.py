@@ -663,7 +663,7 @@ class Script(scripts.Script):
                             <font size="2">
                             You can put comma seperated values here, those will be ignored from any list processing. For example, adding ""film grain, sepia"", will make these values not appear during generation.
 
-                            For advanced users, you can create a permanent file in \\OneButtonPrompt\\userfiles\\ called antilist.csv
+                            For advanced users, you can create a permanent file in \\TwoButtonPrompt\\userfiles\\ called antilist.csv
                             
                             This way, you don't ever have to add it manually again. This file won't be overwritten during upgrades.
 
@@ -841,7 +841,7 @@ class Script(scripts.Script):
                         )
             with gr.Column(variant="compact"):
                 with gr.Row(variant="compact"): 
-                    autonegativeprompt = gr.Checkbox(label="🤖🚫💬 Auto generate negative prompt", value=True) 
+                    autonegativeprompt = gr.Checkbox(label="🤖🚫💬 Auto generate negative prompt", value=False) 
                     autonegativepromptenhance = gr.Checkbox(label="📈🚫💬 Enable base enhancement prompt", value=False)
             with gr.Row(variant="compact"): 
                 autonegativepromptstrength = gr.Slider(0, 10, value="0", step=1, label="🎲🚫💬 Randomness of negative prompt (lower is more consistency)")
@@ -852,7 +852,7 @@ class Script(scripts.Script):
                         """
                         )
             with gr.Row(): 
-                negativeprompt = gr.Textbox(label="🚫💬 Base negative prompt",value="")
+                negativeprompt = gr.Textbox(label="🚫💬 Base negative prompt",value="BeyondSDXLv3")
                  
         with gr.Tab("One Button Run and Upscale"):
             with gr.Row(variant="compact"):
@@ -1149,7 +1149,7 @@ class Script(scripts.Script):
         def OBPPreset_changed_update_custom(selection):
                 # Skip if Custom was selected
                 if selection == OBPresets.CUSTOM_OBP:
-                    return [gr.update()] * 16
+                    return [gr.update()] * 17
                 
                 # Update Custom values based on selected One Button preset
                 if selection == OBPresets.RANDOM_PRESET_OBP:

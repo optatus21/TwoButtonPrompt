@@ -1,5 +1,6 @@
 
 *.pyc
+presets/obp_presets.default
 userfiles/antilist.csv
 userfiles/config.csv
 userfiles/config_anime.csv
